@@ -18,8 +18,9 @@ def score_coverage(student_text, concepts, threshold=0.45):
     if not sentences or not concepts:
         return [{"concept": c, "score": 0.0, "covered": False} for c in concepts]
 
+    windows = sentences + [f"{a} {b}" for a, b in zip(sentences, sentences[1:])]
     model = load_model()
-    sentence_vecs = model.encode(sentences, convert_to_tensor=True)
+    sentence_vecs = model.encode(windows, convert_to_tensor=True)
     concept_vecs = model.encode(concepts, convert_to_tensor=True)
     sims = util.cos_sim(concept_vecs, sentence_vecs)
 
