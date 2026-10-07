@@ -183,6 +183,7 @@ elif topic:
                 if fb["gap"]:
                     st.write(f"**What's missing:** {fb['gap']}")
                 if fb["hint"]:
-                    st.write(f"**Think about this:** {fb['hint']}")
+                    label = "Take it further" if fb["verdict"] == "strong" else "Think about this"
+                    st.write(f"**{label}:** {fb['hint']}")
 else:
     st.info("Enter a topic above to begin.")
